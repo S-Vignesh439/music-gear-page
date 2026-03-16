@@ -24,12 +24,12 @@ console.log("BUY BUTTON CLICKED")
 buyers++
 
 let transporter = nodemailer.createTransport({
-host:"smtp.gmail.com",
-port:465,
-secure: true,
+host: "smtp.gmail.com",
+port: 587,
+secure: false,
 auth:{
-user:"vicky7418vicky7418@gmail.com",
-pass:"oznkgmqiaigjnaqv"
+user: "vicky7418vicky7418@gmail.com",
+pass: "oznkgmqiaigjnaqv"
 }
 })
 
