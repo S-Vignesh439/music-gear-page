@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Music Gear Store</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+<h1> Music Gear Store</h1>
+<input type="text" id="search" placeholder="Search keyboards or audio interfaces...">
+<div class="filters">
+
+<button onclick="filterGear('all')">All</button>
+<button onclick="filterGear('keyboard')">Keyboard</button>
+<button onclick="filterGear('audio')">Audio Interface</button>
+<button onclick="filterGear('midi')">MIDI</button>
+<button onclick="filterGear('synth')">Synth</button>
+<button onclick="filterGear('mixer')">Mixer</button>
+
+</div>
+<div id="gear-container"></div>
+</header>
+
+<script src="script.js"></script>
+
+</body>
+</html>
