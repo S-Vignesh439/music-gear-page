@@ -40,12 +40,20 @@ displayGear(filtered);
 
 });
 
+(function(){
+emailjs.init("YOUR_PUBLIC_KEY");
+})();
+
 function buyProduct(){
 
-fetch("/buy")
-.then(res => res.json())
-.then(data => {
-alert("Buyer registered");
+emailjs.send("YOUR_SERVICE_ID","YOUR_TEMPLATE_ID",{
+product:"Music Gear",
+time:new Date().toLocaleString()
+})
+.then(function(){
+
+alert("Order registered! Email sent");
+
 });
 
 }
