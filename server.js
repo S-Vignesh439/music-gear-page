@@ -25,7 +25,7 @@ buyers++
 
 let transporter = nodemailer.createTransport({
 host: "smtp.gmail.com",
-port: 587,
+port: 1000,
 secure: false,
 auth:{
 user: "vicky7418vicky7418@gmail.com",
