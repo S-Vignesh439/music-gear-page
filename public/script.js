@@ -1,61 +1,44 @@
-let gears = [];
+// Load products from gears.json
+function loadGear() {
+  fetch("gears.json")
+    .then(res => res.json())
+    .then(data => {
+      const container = document.getElementById("products");
+      container.innerHTML = "";
 
-async function loadGear(){
+      data.forEach(item => {
+        const div = document.createElement("div");
+        div.classList.add("product");
 
-const res = await fetch("/gears");
-gears = await res.json();
+        div.innerHTML = `
+          <h3>${item.name}</h3>
+          <p>${item.category}</p>
+          <button onclick="buyProduct('${item.name}')">Buy</button>
+        `;
 
-displayGear(gears);
-
+        container.appendChild(div);
+      });
+    })
+    .catch(err => console.log("LOAD ERROR:", err));
 }
 
-function displayGear(list){
+// Buy button function (EmailJS)
+function buyProduct(productName) {
 
-const container = document.getElementById("gear-container");
-container.innerHTML = "";
-
-list.forEach(g => {
-
-container.innerHTML += `
-
-<div class="card"><a href="${g.link}" target="_blank">
-<img src="${g.image}">
-</a><h3>${g.name}</h3>
-<p>${g.type}</p><button onclick="buyProduct()">Buy</button>
-
-</div>
-`;});
-
-}
-
-document.getElementById("search").addEventListener("input", function(){
-
-const text = this.value.toLowerCase();
-
-const filtered = gears.filter(g =>
-g.name.toLowerCase().includes(text)
-);
-
-displayGear(filtered);
-
-});
-
-(function(){
-emailjs.init("GqynOOoSjPTV6G0sb");
-})();
-
-function buyProduct(){
-
-  emailjs.send("service_3rw9h5b","template_5pxuwat",{
+  emailjs.send("service_3rw9h5b", "template_5pxuwat", {
     name: "Music Gear Buyer",
-    message: "User clicked buy button",
+    message: "Bought: " + productName,
     reply_to: "vicky7418vicky7418@gmail.com"
   })
-  .then(function(){
+  .then(function () {
     alert("Order registered! Email sent");
   })
-  .catch(function(error){
+  .catch(function (error) {
     console.log("EMAIL ERROR:", error);
+    alert("Email failed");
   });
 
 }
+
+// Run on page load
+loadGear();
