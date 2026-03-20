@@ -47,9 +47,9 @@ emailjs.init("GqynOOoSjPTV6G0sb");
 function buyProduct(){
 
   emailjs.send("service_3rw9h5b","template_5pxuwat",{
-    name: "Customer",
-    message: "Product bought",
-    reply_to: "test@gmail.com"
+    name: "Music Gear Buyer",
+    message: "User clicked buy button",
+    reply_to: "vicky7418vicky7418@gmail.com"
   })
   .then(function(){
     alert("Order registered! Email sent");
