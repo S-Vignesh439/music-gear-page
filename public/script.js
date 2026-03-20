@@ -40,14 +40,22 @@ displayGear(filtered);
 
 });
 
+(function(){
+emailjs.init("GqynOOoSjPTV6G0sb");
+})();
+
 function buyProduct(){
 
-fetch("/buy")
-.then(res => res.json())
-.then(data => {
-alert("Buyer registered");
-});
+  emailjs.send("service_3rw9h5b","template_5pxuwat",{
+    name: "Customer",
+    message: "Product bought",
+    reply_to: "test@gmail.com"
+  })
+  .then(function(){
+    alert("Order registered! Email sent");
+  })
+  .catch(function(error){
+    console.log("EMAIL ERROR:", error);
+  });
 
 }
-
-loadGear();

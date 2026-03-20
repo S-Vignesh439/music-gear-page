@@ -18,7 +18,6 @@ res.json(JSON.parse(data))
 
 // buy route
 app.get("/buy",(req,res)=>{
-
 console.log("BUY BUTTON CLICKED")
 
 buyers++
