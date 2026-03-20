@@ -22,14 +22,18 @@ function loadGear() {
     .catch(err => console.log("LOAD ERROR:", err));
 }
 
-// Buy button function (EmailJS)
 function buyProduct(productName) {
 
-  emailjs.send("service_3rw9h5b", "template_5pxuwat", {
-    name: "Music Gear Buyer",
-    message: "Bought: " + productName,
-    reply_to: "vicky7418vicky7418@gmail.com"
-  })
+  emailjs.send(
+    "service_3rw9h5b",
+    "template_5pxuwat",
+    {
+      name: "Music Gear",
+      message: "Bought: " + productName,
+      reply_to: "vicky7418vicky7418@gmail.com"
+    },
+    "GqynOOoSjPTV6G0sb" // 🔥 MUST ADD
+  )
   .then(function () {
     alert("Order registered! Email sent");
   })

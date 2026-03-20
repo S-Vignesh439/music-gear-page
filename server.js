@@ -1,60 +1,29 @@
-const express = require("express")
-const fs = require("fs")
-const nodemailer = require("nodemailer")
+const express = require("express");
+const cors = require("cors");
 
-const app = express()
+const app = express();
+app.use(cors());
+app.use(express.json());
 
-app.use(express.static("public"))
+// Sample products data
+const products = [
+  {
+    id: 1,
+    name: "Product 1",
+    price: 100
+  },
+  {
+    id: 2,
+    name: "Product 2",
+    price: 200
+  }
+];
 
-let buyers = 0
+// API route
+app.get("/products", (req, res) => {
+  res.json(products);
+});
 
-// get products
-app.get("/gears",(req,res)=>{
-
-const data = fs.readFileSync("gears.json")
-res.json(JSON.parse(data))
-
-})
-
-// buy route
-app.get("/buy",(req,res)=>{
-console.log("BUY BUTTON CLICKED")
-
-buyers++
-
-let transporter = nodemailer.createTransport({
-host: "smtp.gmail.com",
-port: 587,
-secure: false,
-auth:{
-user: "vicky7418vicky7418@gmail.com",
-pass: "oznkgmqiaigjnaqv"
-}
-})
-
-let mailOptions = {
-from:"vicky7418vicky7418@gmail.com",
-to:"vicky7418vicky7418@gmail.com",
-subject:"New Buyer Alert",
-text:"Someone clicked buy. Total buyers: " + buyers
-}
-
-transporter.sendMail(mailOptions,function(error,info){
-
-if(error){
-console.log("MAIL ERROR:",error)
-}else{
-console.log("EMAIL SENT")
-}
-
-})
-
-res.json({message:"Buy registered"})
-
-})
-
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-  console.log("Server running on port " + PORT);
+app.listen(5000, () => {
+  console.log("Server running on port 5000");
 });
