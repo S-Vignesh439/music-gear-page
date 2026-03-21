@@ -23,14 +23,7 @@ function displayGear(list){
   });
 }
 
-document.getElementById("search").addEventListener("input", function(){
-  const text = this.value.toLowerCase();
-  const filtered = gears.filter(g => g.name.toLowerCase().includes(text));
-  displayGear(filtered);
-});
-
 function buyProduct(productName){
-
   emailjs.send("service_3rw9h5b","template_5pxuwat",{
     name: "Customer",
     message: "Bought: " + productName,
@@ -42,7 +35,17 @@ function buyProduct(productName){
   .catch(function(error){
     console.log("EMAIL ERROR:", error);
   });
-
 }
 
-loadGear();
+// ✅ FIX: wait for DOM load
+window.onload = function(){
+
+  loadGear();
+
+  document.getElementById("search").addEventListener("input", function(){
+    const text = this.value.toLowerCase();
+    const filtered = gears.filter(g => g.name.toLowerCase().includes(text));
+    displayGear(filtered);
+  });
+
+};
