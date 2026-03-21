@@ -1,7 +1,7 @@
 let gears = [];
 
 async function loadGear(){
-  const res = await fetch("gears.json");
+  const res = await fetch("/gears.json");
   gears = await res.json();
   displayGear(gears);
 }
