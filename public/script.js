@@ -24,17 +24,29 @@ function displayGear(list){
 }
 
 function buyProduct(productName){
+
+  const customerName = prompt("Enter your name:");
+  if (!customerName) return;
+
+  const customerEmail = prompt("Enter your email:");
+  if (!customerEmail || !customerEmail.includes("@")) {
+    alert("Enter valid email");
+    return;
+  }
+
   emailjs.send("service_3rw9h5b","template_5pxuwat",{
-    name: "Customer",
+    name: customerName,
     message: "Bought: " + productName,
-    reply_to: "vicky7418vicky7418@gmail.com"
+    reply_to: customerEmail
   })
   .then(function(){
     alert("Buy registered! Email sent");
   })
   .catch(function(error){
     console.log("EMAIL ERROR:", error);
+    alert("Email failed");
   });
+
 }
 
 // ✅ FIX: wait for DOM load
