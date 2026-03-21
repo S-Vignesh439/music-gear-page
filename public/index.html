@@ -1,35 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Music Gear Store</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <title>Music Gear Page</title>
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    emailjs.init("GqynOOoSjPTV6G0sb");
+  </script>
+
 </head>
 
 <body>
 
-<header>
-<h1> Music Gear Store</h1>
-<input type="text" id="search" placeholder="Search keyboards or audio interfaces...">
-<div class="filters">
+<h1 class="title">🎵 Music Gear Page</h1>
 
-<button onclick="filterGear('all')">All</button>
-<button onclick="filterGear('keyboard')">Keyboard</button>
-<button onclick="filterGear('audio')">Audio Interface</button>
-<button onclick="filterGear('midi')">MIDI</button>
-<button onclick="filterGear('synth')">Synth</button>
-<button onclick="filterGear('mixer')">Mixer</button>
+<input type="text" id="search" placeholder="Search gear...">
 
-</div>
-<div id="products"></div>
-</header>
+<div id="gear-container"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-
 <script>
-  (function(){
-    emailjs.init("GqynOOoSjPTV6G0sb"); // 🔥 same key
-  })();
+  emailjs.init("GqynOOoSjPTV6G0sb");
 </script>
 
 </body>

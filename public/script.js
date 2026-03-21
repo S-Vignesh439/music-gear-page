@@ -1,48 +1,48 @@
-// Load products from gears.json
-function loadGear() {
-  fetch("gears.json")
-    .then(res => res.json())
-    .then(data => {
-      const container = document.getElementById("products");
-      container.innerHTML = "";
+let gears = [];
 
-      data.forEach(item => {
-        const div = document.createElement("div");
-        div.classList.add("product");
-
-        div.innerHTML = `
-          <h3>${item.name}</h3>
-          <p>${item.category}</p>
-          <button onclick="buyProduct('${item.name}')">Buy</button>
-        `;
-
-        container.appendChild(div);
-      });
-    })
-    .catch(err => console.log("LOAD ERROR:", err));
+async function loadGear(){
+  const res = await fetch("gears.json");
+  gears = await res.json();
+  displayGear(gears);
 }
 
-function buyProduct(productName) {
+function displayGear(list){
+  const container = document.getElementById("gear-container");
+  container.innerHTML = "";
 
-  emailjs.send(
-    "service_3rw9h5b",
-    "template_5pxuwat",
-    {
-      name: "Music Gear",
-      message: "Bought: " + productName,
-      reply_to: "vicky7418vicky7418@gmail.com"
-    },
-    "GqynOOoSjPTV6G0sb" // 🔥 MUST ADD
-  )
-  .then(function () {
-    alert("Order registered! Email sent");
+  list.forEach(g => {
+    container.innerHTML += `
+    <div class="card">
+      <a href="${g.link}" target="_blank">
+        <img src="${g.image}">
+      </a>
+      <h3>${g.name}</h3>
+      <p>${g.type}</p>
+      <button onclick="buyProduct('${g.name}')">Buy</button>
+    </div>`;
+  });
+}
+
+document.getElementById("search").addEventListener("input", function(){
+  const text = this.value.toLowerCase();
+  const filtered = gears.filter(g => g.name.toLowerCase().includes(text));
+  displayGear(filtered);
+});
+
+function buyProduct(productName){
+
+  emailjs.send("service_3rw9h5b","template_5pxuwat",{
+    name: "Customer",
+    message: "Bought: " + productName,
+    reply_to: "vicky7418vicky7418@gmail.com"
   })
-  .catch(function (error) {
+  .then(function(){
+    alert("Buy registered! Email sent");
+  })
+  .catch(function(error){
     console.log("EMAIL ERROR:", error);
-    alert("Email failed");
   });
 
 }
 
-// Run on page load
 loadGear();
